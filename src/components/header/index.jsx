@@ -4,7 +4,7 @@ import "./styles.css";
 const Header = () => {
   return (
     <div className="header">
-      <h1>Wordle</h1>
+      <h1>Wordzle</h1>
     </div>
   );
 };
