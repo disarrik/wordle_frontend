@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./styles.css";
+import "./styles.scss";
 
 import Board from "../board";
 import Keyboard from "../keyboard";
