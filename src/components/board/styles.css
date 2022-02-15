@@ -1,0 +1,6 @@
+.board {
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+  border: 2px solid red;
+}
