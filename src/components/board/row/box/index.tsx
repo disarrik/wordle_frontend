@@ -8,23 +8,8 @@ interface IProps {
   status: Status;
 }
 
-const statusColours = new Map<Status, string>([
-  ["CORRECT", "green"],
-  ["INCORRECT", "transparent"],
-  ["EXISTS", "orange"],
-]);
-
 const Box = ({ letter, status }: IProps) => {
-  return (
-    <h3
-      className="box"
-      style={{
-        backgroundColor: statusColours.get(status),
-      }}
-    >
-      {letter}
-    </h3>
-  );
+  return <h3 className={`box--${status.toLowerCase()}`}>{letter}</h3>;
 };
 
 export default Box;
