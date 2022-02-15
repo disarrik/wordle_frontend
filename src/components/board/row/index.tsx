@@ -4,13 +4,15 @@ import "./styles.scss";
 import Box from "./box";
 
 const Row = () => {
-  const [guess, setGuess] = useState<string>();
+  const [guess, setGuess] = useState(["", "", "", "", ""]);
 
   const updateGuess = (newGuess: string) => {
     if (newGuess.length > 5) {
       return;
     }
-    setGuess(newGuess);
+
+    const guessArr = newGuess.split("");
+    setGuess(guessArr);
   };
 
   return (
@@ -21,7 +23,9 @@ const Row = () => {
         spellCheck="false"
         onChange={(e) => updateGuess(e.target.value)}
       />
-      <Box letter="p" status="CORRECT" />
+      {guess.map((letter) => (
+        <Box letter={letter} status="CORRECT" />
+      ))}
     </div>
   );
 };
