@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import "./styles.scss";
 
 import Box from "./box";
 
+import { useGuess } from "../../../hooks/useGuess";
+
 const Row = () => {
-  const [guess, setGuess] = useState(["", "", "", "", ""]);
-
-  const updateGuess = (newGuess: string) => {
-    if (newGuess.length > 5) {
-      return;
-    }
-
-    const guessArr = newGuess.split("");
-    setGuess(guessArr);
-  };
+  const [guess, setGuess] = useGuess();
 
   return (
     <div className="row">
@@ -21,7 +14,8 @@ const Row = () => {
         type="text"
         maxLength={5}
         spellCheck="false"
-        onChange={(e) => updateGuess(e.target.value)}
+        value={guess.join("")}
+        onChange={(e) => setGuess(e.target.value)}
       />
       {guess.map((letter) => (
         <Box letter={letter} status="CORRECT" />
