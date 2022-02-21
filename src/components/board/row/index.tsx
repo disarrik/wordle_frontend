@@ -14,13 +14,15 @@ interface IProps {
 const Row = ({ guess, updateGuess, isActive }: IProps) => {
   return (
     <div className="row">
-      <input
-        type="text"
-        maxLength={5}
-        spellCheck="false"
-        value={guess.value.join("")}
-        onChange={(e) => updateGuess(e.target.value)}
-      />
+      {isActive && (
+        <input
+          type="text"
+          maxLength={5}
+          spellCheck="false"
+          value={guess.value.join("")}
+          onChange={(e) => updateGuess(e.target.value)}
+        />
+      )}
       {guess.value.map((letter) => (
         <Box letter={letter} status="CORRECT" />
       ))}

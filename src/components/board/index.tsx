@@ -10,8 +10,12 @@ const Board = () => {
 
   return (
     <div className="board">
-      {board.guesses.map((guess) => (
-        <Row guess={guess} updateGuess={updateGuess} isActive={true} />
+      {board.guesses.map((guess, i) => (
+        <Row
+          guess={guess}
+          updateGuess={updateGuess}
+          isActive={board.currentGuess == i}
+        />
       ))}
     </div>
   );
