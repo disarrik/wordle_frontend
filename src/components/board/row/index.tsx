@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import "./styles.scss";
 
 import Box from "./box";
@@ -6,18 +6,18 @@ import Box from "./box";
 import { useGuess } from "../../../hooks/useGuess";
 
 const Row = () => {
-  const [guess, setGuess] = useGuess();
-
+  const { guess, updateGuess } = useGuess();
+  console.log(guess);
   return (
     <div className="row">
       <input
         type="text"
         maxLength={5}
         spellCheck="false"
-        value={guess.join("")}
-        onChange={(e) => setGuess(e.target.value)}
+        value={guess.value.join("")}
+        onChange={(e) => updateGuess(e.target.value)}
       />
-      {guess.map((letter) => (
+      {guess.value.map((letter) => (
         <Box letter={letter} status="CORRECT" />
       ))}
     </div>

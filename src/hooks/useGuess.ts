@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useReducer } from "react";
+
+import { initialState, reducer } from "../reducers/board.reducer";
 
 const WORD_LENGTH: number = 5;
 
+// TODO: Consider renaming to useBoard and return the board instead of the current guess.
 export const useGuess = () => {
-  const [guess, setGuess] = useState(["", "", "", "", ""]);
+  const [boardState, boardDispatch] = useReducer(reducer, initialState);
 
   const updateGuess = (newGuess: string) => {
     if (!validGuess(newGuess)) {
@@ -15,12 +18,15 @@ export const useGuess = () => {
       guessArr.push("");
     }
 
-    setGuess(guessArr);
+    boardDispatch({ type: "UPDATE_GUESS", payload: { value: guessArr } });
   };
 
-  const validGuess = (guess: string) => {
-    return guess.length <= WORD_LENGTH && !guess.includes(" ");
-  };
+  return {
+    guess: boardState.guesses[boardState.currentGuess],
+    updateGuess,
+  } as const;
+};
 
-  return [guess, updateGuess] as const;
+const validGuess = (guess: string) => {
+  return guess.length <= WORD_LENGTH && !guess.includes(" ");
 };
