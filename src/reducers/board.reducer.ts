@@ -1,18 +1,8 @@
+import { IGuess, IBoard } from "../types/board";
+
 interface IAction {
   type: string;
   payload: IGuess;
-}
-
-interface IGuess {
-  value: string[];
-  correct?: number[];
-  exists?: number[];
-  submitted?: boolean;
-}
-
-interface IBoard {
-  guesses: IGuess[];
-  currentGuess: number;
 }
 
 export const initialState: IBoard = {

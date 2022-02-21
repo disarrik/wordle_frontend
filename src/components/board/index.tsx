@@ -3,14 +3,16 @@ import "./styles.scss";
 
 import Row from "./row";
 
+import { useBoard } from "../../hooks/useBoard";
+
 const Board = () => {
+  const { board, updateGuess } = useBoard();
+
   return (
     <div className="board">
-      <Row />
-      <Row />
-      <Row />
-      <Row />
-      <Row />
+      {board.guesses.map((guess) => (
+        <Row guess={guess} updateGuess={updateGuess} isActive={true} />
+      ))}
     </div>
   );
 };

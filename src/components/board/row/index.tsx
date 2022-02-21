@@ -3,11 +3,15 @@ import "./styles.scss";
 
 import Box from "./box";
 
-import { useGuess } from "../../../hooks/useGuess";
+import { IGuess } from "../../../types/board";
 
-const Row = () => {
-  const { guess, updateGuess } = useGuess();
-  console.log(guess);
+interface IProps {
+  guess: IGuess;
+  updateGuess: (newGuess: string) => void;
+  isActive: boolean;
+}
+
+const Row = ({ guess, updateGuess, isActive }: IProps) => {
   return (
     <div className="row">
       <input
