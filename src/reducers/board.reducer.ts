@@ -2,7 +2,7 @@ import { IGuess, IBoard } from "../types/board";
 
 interface IAction {
   type: string;
-  payload: IGuess;
+  payload?: IGuess;
 }
 
 export const initialState: IBoard = {
@@ -25,5 +25,12 @@ export function reducer(state: IBoard, action: IAction): IBoard {
           i === state.currentGuess ? action.payload : guess
         ),
       };
+    case "INCREMENT_CURRENT_GUESS":
+      return {
+        ...state,
+        currentGuess: state.currentGuess + 1,
+      };
+    default:
+      throw new Error(`${action.type} action type does not exist.`);
   }
 }

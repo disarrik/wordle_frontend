@@ -3,18 +3,21 @@ import "./styles.scss";
 
 import Row from "./row";
 
-import { useBoard } from "../../hooks/useBoard";
+import { IBoard } from "../../types/board";
 
-const Board = () => {
-  const { board, updateGuess } = useBoard();
+interface IProps {
+  board: IBoard;
+  updateGuess: (s: string) => void;
+}
 
+const Board = ({ board: { guesses, currentGuess }, updateGuess }: IProps) => {
   return (
     <div className="board">
-      {board.guesses.map((guess, i) => (
+      {guesses.map((guess, i) => (
         <Row
           guess={guess}
           updateGuess={updateGuess}
-          isActive={board.currentGuess == i}
+          isActive={currentGuess == i}
         />
       ))}
     </div>
