@@ -35,7 +35,12 @@ export const useBoard = () => {
       type: "UPDATE_GUESS",
       payload: res.guesses.slice(-1)[0],
     });
-    boardDispatch({ type: "INCREMENT_CURRENT_GUESS" });
+
+    if (res.gameStatus == "PLAYING") {
+      boardDispatch({ type: "INCREMENT_CURRENT_GUESS" });
+    }
+
+    boardDispatch({ type: "SET_GAME_OVER", payload: res.gameStatus });
   };
 
   const validGuess = (guess: string[]) => {

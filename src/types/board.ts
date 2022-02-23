@@ -7,4 +7,5 @@ export interface IGuess {
 export interface IBoard {
   guesses: IGuess[];
   currentGuess: number;
+  gameStatus: string;
 }

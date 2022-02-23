@@ -1,8 +1,8 @@
-import { IGuess, IBoard } from "../types/board";
+import { IBoard } from "../types/board";
 
 interface IAction {
   type: string;
-  payload?: IGuess;
+  payload?: any;
 }
 
 export const initialState: IBoard = {
@@ -14,6 +14,7 @@ export const initialState: IBoard = {
     { value: ["", "", "", "", ""], correct: [], exists: [] },
   ],
   currentGuess: 0,
+  gameStatus: "PLAYING",
 };
 
 export function reducer(state: IBoard, action: IAction): IBoard {
@@ -29,6 +30,11 @@ export function reducer(state: IBoard, action: IAction): IBoard {
       return {
         ...state,
         currentGuess: state.currentGuess + 1,
+      };
+    case "SET_GAME_OVER":
+      return {
+        ...state,
+        gameStatus: action.payload,
       };
     default:
       throw new Error(`${action.type} action type does not exist.`);
