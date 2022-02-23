@@ -7,7 +7,7 @@ import { IBoard } from "../../types/board";
 
 interface IProps {
   board: IBoard;
-  updateGuess: (s: string) => void;
+  updateGuess: (s: string[]) => void;
 }
 
 const Board = ({ board: { guesses, currentGuess }, updateGuess }: IProps) => {

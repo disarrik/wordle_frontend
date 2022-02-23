@@ -7,7 +7,7 @@ import { IGuess } from "../../../types/board";
 
 interface IProps {
   guess: IGuess;
-  updateGuess: (newGuess: string) => void;
+  updateGuess: (newGuess: string[]) => void;
   isActive: boolean;
 }
 
@@ -20,11 +20,21 @@ const Row = ({ guess, updateGuess, isActive }: IProps) => {
           maxLength={5}
           spellCheck="false"
           value={guess.value.join("")}
-          onChange={(e) => updateGuess(e.target.value)}
+          onChange={(e) => updateGuess(e.target.value.split(""))}
         />
       )}
-      {guess.value.map((letter) => (
-        <Box letter={letter} status="CORRECT" />
+      {guess.value.map((letter, i) => (
+        <Box
+          key={i}
+          letter={letter}
+          status={
+            guess.correct.includes(i)
+              ? "CORRECT"
+              : guess.exists.includes(i)
+              ? "EXISTS"
+              : "INCORRECT"
+          }
+        />
       ))}
     </div>
   );

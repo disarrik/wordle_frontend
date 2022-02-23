@@ -7,11 +7,11 @@ interface IAction {
 
 export const initialState: IBoard = {
   guesses: [
-    { value: ["", "", "", "", ""] },
-    { value: ["", "", "", "", ""] },
-    { value: ["", "", "", "", ""] },
-    { value: ["", "", "", "", ""] },
-    { value: ["", "", "", "", ""] },
+    { value: ["", "", "", "", ""], correct: [], exists: [] },
+    { value: ["", "", "", "", ""], correct: [], exists: [] },
+    { value: ["", "", "", "", ""], correct: [], exists: [] },
+    { value: ["", "", "", "", ""], correct: [], exists: [] },
+    { value: ["", "", "", "", ""], correct: [], exists: [] },
   ],
   currentGuess: 0,
 };
@@ -22,7 +22,7 @@ export function reducer(state: IBoard, action: IAction): IBoard {
       return {
         ...state,
         guesses: state.guesses.map((guess, i) =>
-          i === state.currentGuess ? action.payload : guess
+          i === state.currentGuess ? { ...guess, ...action.payload } : guess
         ),
       };
     case "INCREMENT_CURRENT_GUESS":

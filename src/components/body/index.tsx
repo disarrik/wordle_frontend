@@ -12,7 +12,7 @@ const Body = () => {
   return (
     <div className="body">
       <Board board={board} updateGuess={updateGuess} />
-      <button type="submit" onClick={() => submitGuess("owlsf")}>
+      <button type="submit" onClick={() => submitGuess()}>
         Submit Guess
       </button>
       <Keyboard />

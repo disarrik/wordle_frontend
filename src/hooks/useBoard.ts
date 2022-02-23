@@ -11,25 +11,26 @@ export const useBoard = () => {
   const WORD_LENGTH: number = 5;
   const [board, boardDispatch] = useReducer(reducer, initialState);
 
-  const updateGuess = (newGuess: string) => {
+  const updateGuess = (newGuess: string[]) => {
     if (!validGuess(newGuess)) {
       return;
     }
 
-    const guessArr = newGuess.split("");
-    for (let i = guessArr.length; i < WORD_LENGTH; i++) {
-      guessArr.push("");
+    for (let i = newGuess.length; i < WORD_LENGTH; i++) {
+      newGuess.push("");
     }
 
-    boardDispatch({ type: "UPDATE_GUESS", payload: { value: guessArr } });
+    boardDispatch({ type: "UPDATE_GUESS", payload: { value: newGuess } });
   };
 
-  const submitGuess = async (guess: string) => {
+  const submitGuess = async () => {
+    const guess = board.guesses[board.currentGuess].value;
+
     if (!validGuess(guess)) {
       return;
     }
 
-    const res = await postGuess(guess);
+    const res = await postGuess(guess.join(""));
     boardDispatch({
       type: "UPDATE_GUESS",
       payload: res.guesses.slice(-1)[0],
@@ -37,7 +38,7 @@ export const useBoard = () => {
     boardDispatch({ type: "INCREMENT_CURRENT_GUESS" });
   };
 
-  const validGuess = (guess: string) => {
+  const validGuess = (guess: string[]) => {
     return guess.length <= WORD_LENGTH && !guess.includes(" ");
   };
 
