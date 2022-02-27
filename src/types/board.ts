@@ -1,7 +1,7 @@
 export interface IGuess {
   value: string[];
-  correct?: number[];
-  exists?: number[];
+  correct: number[];
+  exists: number[];
 }
 
 export interface IBoard {

@@ -9,6 +9,17 @@ interface IWordApi {
   lives: number;
 }
 
+export const fetchPlayerData = async (): Promise<IWordApi> => {
+  console.log("Fetching player stats");
+
+  try {
+    const res = await axios.get("/api/getStats");
+    return toInterface(res.data);
+  } catch (e) {
+    console.log(`An error occurred fetching player stats: ${e}`);
+  }
+};
+
 export const postGuess = async (guess: string): Promise<IWordApi> => {
   console.log(`Submitting guess: ${guess}`);
 

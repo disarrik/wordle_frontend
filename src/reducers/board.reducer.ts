@@ -1,8 +1,14 @@
 import { IBoard } from "../types/board";
+import {
+  UPDATE_CURRENT_GUESS,
+  SET_CURRENT_GUESS_COUNTER,
+  SET_GAME_OVER,
+  INITIALISE_BOARD,
+} from "./board.actions";
 
 interface IAction {
   type: string;
-  payload?: any;
+  payload: any;
 }
 
 export const initialState: IBoard = {
@@ -19,19 +25,35 @@ export const initialState: IBoard = {
 
 export function reducer(state: IBoard, action: IAction): IBoard {
   switch (action.type) {
-    case "UPDATE_GUESS":
+    case INITIALISE_BOARD:
+      const newGuesses = action.payload.guesses;
+      for (let i = newGuesses.length; i < 5; i++) {
+        newGuesses.push({
+          value: ["", "", "", "", ""],
+          correct: [],
+          exists: [],
+        });
+      }
+
+      return {
+        ...state,
+        gameStatus: action.payload.gameStatus,
+        currentGuess: 5 - action.payload.lives,
+        guesses: newGuesses,
+      };
+    case UPDATE_CURRENT_GUESS:
       return {
         ...state,
         guesses: state.guesses.map((guess, i) =>
           i === state.currentGuess ? { ...guess, ...action.payload } : guess
         ),
       };
-    case "INCREMENT_CURRENT_GUESS":
+    case SET_CURRENT_GUESS_COUNTER:
       return {
         ...state,
-        currentGuess: state.currentGuess + 1,
+        currentGuess: action.payload,
       };
-    case "SET_GAME_OVER":
+    case SET_GAME_OVER:
       return {
         ...state,
         gameStatus: action.payload,
