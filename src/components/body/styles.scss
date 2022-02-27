@@ -1,1 +1,17 @@
+.body {
+  text-align: center;
 
+  > button {
+    margin: auto;
+    font-family: "Rubik", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    border: 3px solid white;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(83, 83, 83);
+    }
+  }
+}

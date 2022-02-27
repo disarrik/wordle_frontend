@@ -2,6 +2,7 @@
   height: 90px;
   position: relative;
   display: flex;
+  justify-content: space-between;
 }
 
 .row input {
@@ -13,9 +14,10 @@
   color: transparent;
   caret-color: transparent;
   background-color: transparent;
-}
 
-.row input:active {
-  outline: none;
-  border: none;
+  &,
+  &:focus {
+    outline: none;
+    border: none;
+  }
 }
