@@ -23,7 +23,7 @@ export const useBoard = () => {
   }, []);
 
   const updateGuess = (newGuess: string[]) => {
-    if (!validGuess(newGuess)) {
+    if (!validUpdate(newGuess)) {
       return;
     }
 
@@ -40,17 +40,23 @@ export const useBoard = () => {
   const submitGuess = async () => {
     const guess = board.guesses[board.currentGuess].value;
 
-    if (!validGuess(guess)) {
+    if (!validSubmission(guess)) {
       return;
     }
-
+    console.log("foo");
     const res = await postGuess(guess.join(""));
 
     boardDispatch({ type: UPDATE_BOARD, payload: res });
   };
 
-  const validGuess = (guess: string[]) => {
+  const validUpdate = (guess: string[]) => {
     return guess.length <= WORD_LENGTH && !guess.includes(" ");
+  };
+
+  const validSubmission = (guess: string[]) => {
+    return (
+      guess.length == WORD_LENGTH && !guess.includes(" ") && !guess.includes("")
+    );
   };
 
   return {
