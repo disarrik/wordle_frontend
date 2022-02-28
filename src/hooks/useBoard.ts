@@ -6,7 +6,7 @@ import {
   UPDATE_CURRENT_GUESS,
   SET_CURRENT_GUESS_COUNTER,
   SET_GAME_OVER,
-  INITIALISE_BOARD,
+  UPDATE_BOARD,
 } from "../reducers/board.actions";
 
 export const useBoard = () => {
@@ -16,7 +16,7 @@ export const useBoard = () => {
   useEffect(() => {
     const initialiseBoard = async () => {
       const res = await fetchPlayerData();
-      boardDispatch({ type: INITIALISE_BOARD, payload: res });
+      boardDispatch({ type: UPDATE_BOARD, payload: res });
     };
 
     initialiseBoard();
@@ -45,19 +45,8 @@ export const useBoard = () => {
     }
 
     const res = await postGuess(guess.join(""));
-    boardDispatch({
-      type: UPDATE_CURRENT_GUESS,
-      payload: res.guesses.slice(-1)[0],
-    });
 
-    if (res.gameStatus == "PLAYING") {
-      boardDispatch({
-        type: SET_CURRENT_GUESS_COUNTER,
-        payload: 5 - res.lives,
-      });
-    }
-
-    boardDispatch({ type: SET_GAME_OVER, payload: res.gameStatus });
+    boardDispatch({ type: UPDATE_BOARD, payload: res });
   };
 
   const validGuess = (guess: string[]) => {

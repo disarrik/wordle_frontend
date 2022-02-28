@@ -3,7 +3,7 @@ import {
   UPDATE_CURRENT_GUESS,
   SET_CURRENT_GUESS_COUNTER,
   SET_GAME_OVER,
-  INITIALISE_BOARD,
+  UPDATE_BOARD,
 } from "./board.actions";
 
 interface IAction {
@@ -25,7 +25,7 @@ export const initialState: IBoard = {
 
 export function reducer(state: IBoard, action: IAction): IBoard {
   switch (action.type) {
-    case INITIALISE_BOARD:
+    case UPDATE_BOARD:
       const newGuesses = action.payload.guesses;
       for (let i = newGuesses.length; i < 5; i++) {
         newGuesses.push({
@@ -47,16 +47,6 @@ export function reducer(state: IBoard, action: IAction): IBoard {
         guesses: state.guesses.map((guess, i) =>
           i === state.currentGuess ? { ...guess, ...action.payload } : guess
         ),
-      };
-    case SET_CURRENT_GUESS_COUNTER:
-      return {
-        ...state,
-        currentGuess: action.payload,
-      };
-    case SET_GAME_OVER:
-      return {
-        ...state,
-        gameStatus: action.payload,
       };
     default:
       throw new Error(`${action.type} action type does not exist.`);
