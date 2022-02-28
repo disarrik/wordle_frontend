@@ -20,6 +20,7 @@ const Board = ({
     <div className="board">
       {guesses.map((guess, i) => (
         <Row
+          key={i}
           guess={guess}
           updateGuess={updateGuess}
           submitGuess={submitGuess}
