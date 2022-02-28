@@ -11,13 +11,17 @@ const Body = () => {
 
   return (
     <div className="body">
-      <Board board={board} updateGuess={updateGuess} />
+      <Board
+        board={board}
+        updateGuess={updateGuess}
+        submitGuess={submitGuess}
+      />
       {board.gameStatus == "PLAYING" && (
         <button type="submit" onClick={() => submitGuess()}>
           Submit Guess
         </button>
       )}
-      <Keyboard />
+      {/* <Keyboard /> */}
     </div>
   );
 };
