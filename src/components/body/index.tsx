@@ -21,7 +21,7 @@ const Body = () => {
           Submit Guess
         </button>
       )}
-      <Keyboard />
+      <Keyboard board={board} />
     </div>
   );
 };

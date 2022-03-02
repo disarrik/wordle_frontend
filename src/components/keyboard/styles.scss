@@ -1,4 +1,6 @@
-kbd {
+@import "../styleConstants.scss";
+
+.keyboard-key {
   background-color: #eee;
   border-radius: 3px;
   border: 1px solid #b4b4b4;
@@ -10,5 +12,21 @@ kbd {
   font-weight: 700;
   line-height: 1;
   padding: 2px 4px;
+  margin: 5px;
   white-space: nowrap;
+
+  &--correct {
+    @extend .keyboard-key;
+    background-color: $CORRECT;
+  }
+
+  &--incorrect {
+    @extend .keyboard-key;
+    background-color: $INCORRECT;
+  }
+
+  &--exists {
+    @extend .keyboard-key;
+    background-color: $EXISTS;
+  }
 }

@@ -7,6 +7,11 @@ interface IWordApi {
   guessIsCorrect: boolean;
   guesses: IGuess[];
   lives: number;
+  discoveredLetters: {
+    correct: string[];
+    incorrect: string[];
+    exists: string[];
+  };
 }
 
 export const fetchPlayerData = async (): Promise<IWordApi> => {
@@ -43,5 +48,6 @@ const toInterface = (obj: any): IWordApi => {
       correct: guess["correct"],
       exists: guess["exists"],
     })),
+    discoveredLetters: obj["discovered-letters"],
   };
 };
