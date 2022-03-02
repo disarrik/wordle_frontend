@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 
 import Board from "../board";
@@ -8,6 +8,14 @@ import { useBoard } from "../../hooks/useBoard";
 
 const Body = () => {
   const { board, submitGuess, updateGuess } = useBoard();
+
+  useEffect(() => {
+    if (board.gameStatus === "WON") {
+      alert("Congratulations! You won!");
+    } else if (board.gameStatus === "LOST") {
+      alert("Sorry, you lost. Out of lives...");
+    }
+  }, [board.gameStatus]);
 
   return (
     <div className="body">
