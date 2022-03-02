@@ -8,4 +8,3 @@ EXPOSE 80
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /app/dist .
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
