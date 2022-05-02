@@ -39,7 +39,7 @@ export const useBoard = () => {
       return;
     }
 
-    const res = await postGuess(guess.join(""));
+    const res = await postGuess(guess.join(""));//todo передать в postGuess chat_id и user_id
     boardDispatch({ type: UPDATE_BOARD, payload: res });
   };
 

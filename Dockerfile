@@ -1,4 +1,4 @@
-FROM node:alpine AS builder
+FROM node AS builder
 WORKDIR /app
 COPY . .
 RUN npm install && npm rebuild node-sass && npm run build

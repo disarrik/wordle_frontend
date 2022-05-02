@@ -31,6 +31,7 @@ export const postGuess = async (guess: string): Promise<IWordApi> => {
   try {
     const res = await axios.post("/api/submitGuess", {
       guess,
+      //todo user_id, chat_id
     });
     return toInterface(res.data);
   } catch (e) {
