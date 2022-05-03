@@ -2,7 +2,7 @@ import { useReducer, useEffect } from "react";
 
 import { initialState, reducer } from "../reducers/board.reducer";
 import { fetchPlayerData, postGuess } from "../services/wordApi";
-import { UPDATE_CURRENT_GUESS, UPDATE_BOARD } from "../reducers/board.actions";
+import { UPDATE_CURRENT_GUESS, UPDATE_BOARD, ADD_LETTER } from "../reducers/board.actions";
 
 export const useBoard = () => {
   const WORD_LENGTH: number = 5;
@@ -39,9 +39,13 @@ export const useBoard = () => {
       return;
     }
 
-    const res = await postGuess(guess.join(""));//todo передать в postGuess chat_id и user_id
+    const res = await postGuess(guess.join(""));
     boardDispatch({ type: UPDATE_BOARD, payload: res });
   };
+
+  const addLetter = (char: string) => {
+    boardDispatch({ type: ADD_LETTER, payload: char });
+  }
 
   const validUpdate = (guess: string[]) => {
     return guess.length <= WORD_LENGTH && !guess.includes(" ");
@@ -57,5 +61,6 @@ export const useBoard = () => {
     board,
     updateGuess,
     submitGuess,
+    addLetter,
   } as const;
 };

@@ -7,7 +7,7 @@ import Keyboard from "../keyboard";
 import { useBoard } from "../../hooks/useBoard";
 
 const Body = () => {
-  const { board, submitGuess, updateGuess } = useBoard();
+  const { board, submitGuess, updateGuess, addLetter } = useBoard();
 
   useEffect(() => {
     if (board.gameStatus === "WON") {
@@ -29,7 +29,7 @@ const Body = () => {
           Submit Guess
         </button>
       )}
-      <Keyboard board={board} />
+      <Keyboard board={board} addLetter={addLetter}/>
     </div>
   );
 };

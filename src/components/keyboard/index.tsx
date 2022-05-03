@@ -4,9 +4,10 @@ import "./styles.scss";
 
 interface IProps {
   board: IBoard;
+  addLetter: any;
 }
 
-const Keyboard = ({ board: { discoveredLetters } }: IProps) => {
+const Keyboard = ({ board: { discoveredLetters }, addLetter }: IProps) => {
   const keyboardLetters = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -17,7 +18,7 @@ const Keyboard = ({ board: { discoveredLetters } }: IProps) => {
     return (
       <div className="keyboard-row">
         {row.map((letter) => (
-          <kbd
+          <kbd onClick={() => addLetter(letter)}
             className={`keyboard-key${
               discoveredLetters.correct.includes(letter.toLowerCase())
                 ? "--correct"
