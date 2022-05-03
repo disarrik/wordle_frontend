@@ -16,9 +16,16 @@ interface IWordApi {
 
 export const fetchPlayerData = async (): Promise<IWordApi> => {
   console.log("Fetching player stats");
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
 
   try {
-    const res = await axios.get("/api/getStats");
+    const res = await axios.get("/api/getStats", {
+      params: {
+        user_id: urlParams.get('user_id'), 
+        chat_id: urlParams.get('chat_id')
+      }
+    });
     return toInterface(res.data);
   } catch (e) {
     console.log(`An error occurred fetching player stats: ${e}`);
@@ -27,12 +34,22 @@ export const fetchPlayerData = async (): Promise<IWordApi> => {
 
 export const postGuess = async (guess: string): Promise<IWordApi> => {
   console.log(`Submitting guess: ${guess}`);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
 
   try {
-    const res = await axios.post("/api/submitGuess", {
+    const res = await axios.post(
+      "/api/submitGuess", 
+      {
       guess,
-      //todo user_id, chat_id
-    });
+      },
+      {
+        params: {
+          user_id: urlParams.get('user_id'), 
+          chat_id: urlParams.get('chat_id')
+        }
+      }
+    );
     return toInterface(res.data);
   } catch (e) {
     console.log(e);
