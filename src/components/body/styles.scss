@@ -9,12 +9,12 @@
     border: 3px solid white;
     border-radius: 5px;
 
-    @media(max-width : 800px) {
+    @media(max-width : 450px) {
       margin: 25px;
-      font-size: 90px;
+      font-size: 2rem;
       padding: 15px;
       border-width: 10px;
-      margin-bottom: 500px;
+      margin-bottom: 35%;
     }
 
     &:hover {
