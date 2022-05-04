@@ -33,7 +33,7 @@ export function reducer(state: IBoard, action: IAction): IBoard {
     case ADD_LETTER:
       const currentGuess = state.guesses[state.currentGuess].value;
       let index = 0;
-      while(currentGuess[index] !== "")  {
+      while (currentGuess[index] !== "" && index != 5) {
         index++;
       }
       if (index < 5) {
